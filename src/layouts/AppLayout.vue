@@ -16,7 +16,7 @@
       >
         <div align="center" class="drawerIcon">
           <img src="../assets/general/logo.png" alt="" />
-          <p class="text-white text-h5 text-bold">Sport System</p>
+          <p class="text-white text-h5 text-bold">Kinetic</p>
         </div>
         <div>
           <q-list @click="pushToMainPage">

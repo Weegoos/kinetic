@@ -41,7 +41,6 @@ import {
 } from "echarts/components";
 import { CanvasRenderer } from "echarts/renderers";
 
-// Регистрируем необходимые компоненты
 echarts.use([
   PieChart,
   LineChart,
