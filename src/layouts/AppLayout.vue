@@ -40,16 +40,18 @@
           >
           </q-tree>
         </div>
-        <q-list @click="pustToResultPage">
-          <q-item clickable v-ripple>
-            <q-item-section avatar>
-              <q-icon name="code" />
-            </q-item-section>
-            <q-item-section>Аналитика</q-item-section>
-          </q-item>
-        </q-list>
+        <div>
+          <q-list>
+            <q-item clickable v-ripple>
+              <q-item-section avatar>
+                <q-icon name="code" />
+              </q-item-section>
+              <q-item-section>Аналитика</q-item-section>
+            </q-item>
+          </q-list>
+        </div>
         <q-list>
-          <q-item clickable v-ripple>
+          <q-item clickable v-ripple @click="pustToResultPage">
             <q-item-section avatar>
               <q-icon name="code" />
             </q-item-section>
@@ -67,11 +69,13 @@
 </template>
 
 <script setup>
+import { useQuasar } from "quasar";
 import { ref } from "vue";
 import { useRouter } from "vue-router";
 import calendar from "../assets/drawer/calendar.png";
 const expanded = ref([]);
 const router = useRouter();
+const $q = useQuasar();
 const simple = [
   {
     label: "Календарь",
