@@ -53,7 +53,7 @@
           <WorstExercise />
         </div>
         <div class="col">
-          <!-- <ActivityPage /> -->
+          <BestExerices />
         </div>
       </div>
     </section>
@@ -65,6 +65,7 @@ import { ref } from "vue";
 import GeneralAnalytics from "../components/Analytics/GeneralAnalytics.vue";
 import ActivityPage from "../components/Analytics/ActivityPage.vue";
 import WorstExercise from "../components/Analytics/WorstExercise.vue";
+import BestExerices from "../components/Analytics/BestExerices.vue";
 
 const time = ref("");
 const people = ref("");
