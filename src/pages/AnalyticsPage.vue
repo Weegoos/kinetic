@@ -63,7 +63,7 @@
           <LeadersPage />
         </div>
         <div class="col">
-          <!-- <BestExerices /> -->
+          <GroupLeaders />
         </div>
       </div>
     </section>
@@ -77,6 +77,7 @@ import ActivityPage from "../components/Analytics/ActivityPage.vue";
 import WorstExercise from "../components/Analytics/WorstExercise.vue";
 import BestExerices from "../components/Analytics/BestExerices.vue";
 import LeadersPage from "../components/Analytics/LeadersPage.vue";
+import GroupLeaders from "../components/Analytics/GroupLeaders.vue";
 
 const time = ref("");
 const people = ref("");
