@@ -1,0 +1,23 @@
+// app global css in SCSS form
+:root {
+  --drawer: #1d2146;
+}
+
+@font-face {
+  font-family: Montserrat;
+  src: url(../fonts/Montserrat-VariableFont_wght.ttf);
+}
+
+*,
+*::after,
+*::before {
+  font-family: Montserrat;
+}
+
+.drawer {
+  background-color: var(--drawer);
+}
+
+.drawerIcon {
+  margin-top: 75px;
+}
