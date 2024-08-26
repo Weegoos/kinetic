@@ -1,5 +1,5 @@
 <template>
-  <div class="q-ma-md">
+  <div class="q-pa-md">
     <section>
       <FilterGreeting />
     </section>

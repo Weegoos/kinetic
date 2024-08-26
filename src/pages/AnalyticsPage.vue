@@ -1,9 +1,54 @@
 <template>
-  <div>Analytics</div>
+  <div class="q-ma-md">
+    <p class="text-bold text-h6">Аналитика</p>
+    <section class="row q-gutter-md">
+      <div class="col">
+        <q-card class="my-card">
+          <q-input
+            class="input"
+            v-model="time"
+            type="text"
+            label="Временные рамки"
+            dense
+          />
+        </q-card>
+      </div>
+      <div class="col">
+        <q-card class="my-card">
+          <q-input
+            class="input"
+            v-model="people"
+            type="text"
+            label="Люди"
+            dense
+          />
+        </q-card>
+      </div>
+      <div class="col">
+        <q-card class="my-card">
+          <q-input
+            class="input"
+            v-model="exercises"
+            type="text"
+            label="Упражнение"
+            dense
+          />
+        </q-card>
+      </div>
+    </section>
+  </div>
 </template>
 
-<script>
-export default {};
+<script setup>
+import { ref } from "vue";
+
+const time = ref("");
+const people = ref("");
+const exercises = ref("");
 </script>
 
-<style></style>
+<style scoped>
+.input {
+  padding: 8px;
+}
+</style>
