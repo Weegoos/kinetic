@@ -3,12 +3,12 @@
     <div class="row q-gutter-md">
       <section class="col">
         <q-card class="my-card">
-          <div ref="chartContainer" class="lineChart"></div>
+          <div ref="chartContainer" class="chart"></div>
         </q-card>
       </section>
       <section class="col">
         <q-card class="my-card">
-          <div ref="barChart" class="lineChart"></div>
+          <div ref="barChart" class="chart"></div>
         </q-card>
       </section>
     </div>
@@ -220,7 +220,7 @@ const createBarChart = () => {
 </script>
 
 <style scoped>
-.lineChart {
+.chart {
   height: 250px;
   width: 100%;
 }
