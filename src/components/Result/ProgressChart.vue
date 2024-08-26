@@ -152,7 +152,7 @@ const createLinearChart = () => {
     },
     title: {
       left: "center",
-      text: "Large Area Chart with Weekly Intervals",
+      text: "График прогресса",
     },
     toolbox: {
       feature: {
