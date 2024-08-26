@@ -42,7 +42,7 @@
         </div>
         <div>
           <q-list>
-            <q-item clickable v-ripple>
+            <q-item clickable v-ripple @click="pushToAnalyticsPage">
               <q-item-section avatar>
                 <q-icon name="code" />
               </q-item-section>
@@ -105,6 +105,10 @@ const pushToMainPage = () => {
 
 const pustToResultPage = () => {
   router.push("/result");
+};
+
+const pushToAnalyticsPage = () => {
+  router.push("/analytics");
 };
 </script>
 
