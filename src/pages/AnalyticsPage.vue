@@ -47,6 +47,16 @@
         </div>
       </div>
     </section>
+    <section class="q-mt-md">
+      <div class="row q-gutter-md">
+        <div class="col analytics">
+          <WorstExercise />
+        </div>
+        <div class="col">
+          <!-- <ActivityPage /> -->
+        </div>
+      </div>
+    </section>
   </div>
 </template>
 
@@ -54,6 +64,7 @@
 import { ref } from "vue";
 import GeneralAnalytics from "../components/Analytics/GeneralAnalytics.vue";
 import ActivityPage from "../components/Analytics/ActivityPage.vue";
+import WorstExercise from "../components/Analytics/WorstExercise.vue";
 
 const time = ref("");
 const people = ref("");
