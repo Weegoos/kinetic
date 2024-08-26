@@ -42,7 +42,9 @@
         <div class="col analytics">
           <GeneralAnalytics />
         </div>
-        <div class="col">Batyr</div>
+        <div class="col">
+          <ActivityPage />
+        </div>
       </div>
     </section>
   </div>
@@ -51,6 +53,8 @@
 <script setup>
 import { ref } from "vue";
 import GeneralAnalytics from "../components/Analytics/GeneralAnalytics.vue";
+import ActivityPage from "../components/Analytics/ActivityPage.vue";
+
 const time = ref("");
 const people = ref("");
 const exercises = ref("");

@@ -62,6 +62,7 @@ export default {};
 .generalAnalytics {
   padding: 12px;
   border-radius: 10px;
+  height: 160px;
 }
 
 .headline {
