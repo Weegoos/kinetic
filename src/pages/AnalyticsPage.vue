@@ -57,6 +57,16 @@
         </div>
       </div>
     </section>
+    <section class="q-mt-md">
+      <div class="row q-gutter-md">
+        <div class="col analytics">
+          <LeadersPage />
+        </div>
+        <div class="col">
+          <!-- <BestExerices /> -->
+        </div>
+      </div>
+    </section>
   </div>
 </template>
 
@@ -66,6 +76,7 @@ import GeneralAnalytics from "../components/Analytics/GeneralAnalytics.vue";
 import ActivityPage from "../components/Analytics/ActivityPage.vue";
 import WorstExercise from "../components/Analytics/WorstExercise.vue";
 import BestExerices from "../components/Analytics/BestExerices.vue";
+import LeadersPage from "../components/Analytics/LeadersPage.vue";
 
 const time = ref("");
 const people = ref("");
