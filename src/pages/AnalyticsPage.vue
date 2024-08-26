@@ -36,12 +36,21 @@
         </q-card>
       </div>
     </section>
+
+    <section class="q-mt-md">
+      <div class="row q-gutter-md">
+        <div class="col analytics">
+          <GeneralAnalytics />
+        </div>
+        <div class="col">Batyr</div>
+      </div>
+    </section>
   </div>
 </template>
 
 <script setup>
 import { ref } from "vue";
-
+import GeneralAnalytics from "../components/Analytics/GeneralAnalytics.vue";
 const time = ref("");
 const people = ref("");
 const exercises = ref("");
