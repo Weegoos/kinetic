@@ -4,24 +4,29 @@
       <div class="col">
         <q-card class="my-card row">
           <div class="col">
-            <div
-              ref="power"
-              class="chart"
-              @click="showResultOfPowerExercises"
-            ></div>
+            <div ref="power" class="chart" @click="showResultOfExercises"></div>
             <p class="description" align="center">Сила</p>
           </div>
           <div class="col">
-            <div ref="endurance" class="chart"></div>
+            <div
+              ref="endurance"
+              class="chart"
+              @click="showResultOfExercises"
+            ></div>
             <p class="description" align="center">Выносливость</p>
           </div>
           <div class="col">
-            <div ref="speed" class="chart"></div>
+            <div ref="speed" class="chart" @click="showResultOfExercises"></div>
             <p class="description" align="center">Скорость</p>
           </div>
         </q-card>
       </div>
     </section>
+    <SpeedDialog
+      :chartName="chartName"
+      :exercisesDialog="exercisesDialog"
+      @close="closeDialog"
+    />
   </div>
 </template>
 
@@ -40,7 +45,7 @@ import {
 } from "echarts/components";
 import { CanvasRenderer } from "echarts/renderers";
 import { useQuasar } from "quasar";
-
+import SpeedDialog from "../PhysicalExerises/DialogPage.vue";
 echarts.use([
   PieChart,
   TooltipComponent,
@@ -56,12 +61,36 @@ echarts.use([
 const power = ref(null);
 const endurance = ref(null);
 const speed = ref(null);
-const chartContainer = ref(null);
+const chartName = ref("");
 
 onMounted(() => {
-  createChart(power.value, "Сила", "#FF5B5B", "#FFE4E4", 5, 95);
-  createChart(endurance.value, "Выносливость", "#00B074", "#DBF3EB", 22, 78);
-  createChart(speed.value, "Скорость", "#2D9CDB", "#B4DFF7", 72, 28);
+  createChart(
+    power.value,
+    "Сила",
+    "#FF5B5B",
+    "#FFE4E4",
+    5,
+    95,
+    () => (chartName.value = "Сила")
+  );
+  createChart(
+    endurance.value,
+    "Выносливость",
+    "#00B074",
+    "#DBF3EB",
+    22,
+    78,
+    () => (chartName.value = "Выносливость")
+  );
+  createChart(
+    speed.value,
+    "Скорость",
+    "#2D9CDB",
+    "#B4DFF7",
+    72,
+    28,
+    () => (chartName.value = "Скорость")
+  );
 });
 
 const createChart = (
@@ -70,7 +99,8 @@ const createChart = (
   mainColor,
   remainColor,
   mainValue,
-  remainValue
+  remainValue,
+  onClickHandler
 ) => {
   const myChart = echarts.init(item);
 
@@ -124,17 +154,20 @@ const createChart = (
   };
 
   myChart.setOption(option);
-
+  myChart.on("click", onClickHandler);
   window.addEventListener("resize", () => {
     myChart.resize();
   });
 };
 
 const $q = useQuasar();
-const showResultOfPowerExercises = () => {
-  $q.notify({
-    message: "Clicked",
-  });
+const exercisesDialog = ref(false);
+const showResultOfExercises = () => {
+  exercisesDialog.value = true;
+};
+
+const closeDialog = () => {
+  exercisesDialog.value = false;
 };
 </script>
 

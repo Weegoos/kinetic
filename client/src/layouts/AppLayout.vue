@@ -6,7 +6,6 @@
           <q-btn flat round dense icon="menu" @click="drawer != drawer" />
           <q-toolbar-title></q-toolbar-title>
           <p class="text-body1 q-mt-md">{{ currentUserName }}</p>
-
         </q-toolbar>
       </q-header>
       <q-drawer
@@ -143,7 +142,7 @@ const redirectToKeycloakLogin = () => {
   window.location.href = `http://localhost:8000/auth/login`;
 };
 
-const currentUserName = ref('')
+const currentUserName = ref("");
 onBeforeMount(() => {
   (async () => {
     try {
@@ -151,15 +150,15 @@ onBeforeMount(() => {
         withCredentials: true,
       });
       const userInfo = response.data;
-      currentUserName.value = userInfo.name
-      const isShowed = ref(sessionStorage.getItem('isShowed'))
-      if (currentUserName.value != null && isShowed.value == null){
+      currentUserName.value = userInfo.name;
+      const isShowed = ref(sessionStorage.getItem("isShowed"));
+      if (currentUserName.value != null && isShowed.value == null) {
         $q.notify({
           message: `Добро пожаловать ${currentUserName.value}!`,
-          color: 'positive',
-          icon: 'check'
-        })
-        sessionStorage.setItem('isShowed', true)
+          color: "positive",
+          icon: "check",
+        });
+        sessionStorage.setItem("isShowed", true);
       }
     } catch (error) {
       console.error("Ошибка при получении Access Token:", error);
