@@ -13,6 +13,7 @@
       </FullCalendar>
     </div>
 
+    <!-- q-dialog для ввода названия события -->
     <q-dialog v-model="dialogOpen" persistent>
       <q-card style="width: 400px">
         <q-card-section>
