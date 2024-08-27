@@ -6,7 +6,7 @@
           <p class="text-bold text-h6">Деятельность</p>
         </div>
         <div class="col" align="right">
-          <q-input dense v-model="text" type="text" label="Время" list="sort" />
+          <q-input dense v-model="time" type="text" label="Время" list="sort" />
           <datalist id="sort">
             <div v-for="(items, id) in timeOptions" :key="id">
               <option :value="items"></option>
@@ -22,7 +22,7 @@
 </template>
 
 <script setup>
-import { onMounted, onBeforeUnmount } from "vue";
+import { onMounted, onBeforeUnmount, ref } from "vue";
 import * as echarts from "echarts";
 
 onMounted(() => {
@@ -81,6 +81,7 @@ onMounted(() => {
   });
 });
 
+const time = ref('')
 const timeOptions = ["День", "Неделя", "Месяц", "Год"];
 </script>
 

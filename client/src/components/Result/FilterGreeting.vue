@@ -13,7 +13,7 @@
           <div class="col-9" align="left">
             <q-input
               dense
-              v-model="text"
+              v-model="filter"
               type="text"
               label="Фильтрация"
               list="dateList"
@@ -31,6 +31,9 @@
 </template>
 
 <script setup>
+import { ref } from 'vue';
+
+const filter = ref('')
 const dates = [
   {
     date: "12-07-2024",
