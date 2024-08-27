@@ -3,7 +3,6 @@
     <p class="text-bold text-h6">Поиск сотрудников</p>
     <section>
       <q-table flat bordered dense :rows="rows" :columns="columns" row-key="id">
-        <!-- Custom column for buttons -->
         <template v-slot:body-cell-actions="props">
           <q-td :props="props">
             <q-btn flat size="sm" icon="edit" @click="editRow(props.row)">
@@ -13,7 +12,7 @@
               flat
               size="sm"
               icon="menu"
-              @click="deleteRow(props.row)"
+              @click="openDetialedWindow(props.row)"
               class="q-ml-sm"
             >
               <q-tooltip> Подробнее </q-tooltip>
@@ -21,11 +20,19 @@
           </q-td>
         </template>
       </q-table>
+      <DetialedInformation
+        :openDetailedInformation="openDetailedInformation"
+        @close="closeDetialedWindow"
+      />
     </section>
   </div>
 </template>
 
 <script setup>
+import { useQuasar } from "quasar";
+import DetialedInformation from "../components/StaffPage/DetailedInformation/DetialedInformation.vue";
+import { ref } from "vue";
+const $q = useQuasar();
 const columns = [
   {
     name: "id",
@@ -94,9 +101,15 @@ function editRow(row) {
   console.log("Editing row:", row);
 }
 
-function deleteRow(row) {
-  console.log("Deleting row:", row);
+const openDetailedInformation = ref(true);
+
+function openDetialedWindow(row) {
+  openDetailedInformation.value = true;
 }
+
+const closeDetialedWindow = () => {
+  openDetailedInformation.value = false;
+};
 </script>
 
 <style></style>
