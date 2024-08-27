@@ -140,30 +140,29 @@ const redirectToKeycloakLogin = () => {
   window.location.href = `http://localhost:8000/auth/login`;
 };
 
-// onBeforeMount(() => {
-//   (async () => {
-//     try {
-//       const response = await axios.get(`http://localhost:8000/auth/user`, {
-//         withCredentials: true,
-//       });
-//       const userInfo = response.data;
-//       console.log(userInfo);
+onBeforeMount(() => {
+  (async () => {
+    try {
+      const response = await axios.get(`http://localhost:8000/auth/user`, {
+        withCredentials: true,
+      });
+      const userInfo = response.data;
+      console.log(userInfo);
+    } catch (error) {
+      console.error("Ошибка при получении Access Token:", error);
+      redirectToKeycloakLogin();
+    }
+  })();
+});
 
-//     } catch (error) {
-//       console.error("Ошибка при получении Access Token:", error);
-//       redirectToKeycloakLogin();
-//     }
-//   })();
-// });
+const logoutFromBackend = async () => {
+  window.location.href = `http://localhost:8000/auth/logout`;
+  sessionStorage.clear();
+};
 
-// const logoutFromBackend = async () => {
-//   window.location.href = `http://localhost:8000/auth/logout`
-//   sessionStorage.clear()
-// };
-
-// const logoutBtn = () => {
-//   logoutFromBackend();
-// };
+const logoutBtn = () => {
+  logoutFromBackend();
+};
 </script>
 
 <style scoped>
