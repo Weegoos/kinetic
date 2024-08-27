@@ -84,7 +84,7 @@ async def logout(request: Request):
         if response_kc.status_code != 204:
             raise HTTPException(status_code=response.status_code, detail="Failed to end session")
         
-        response = RedirectResponse(url=f"{server_base_url}auth/login")
+        response = RedirectResponse(url=f"{server_base_url}/auth/login")
         response.delete_cookie(key="access_token", path='/')
         response.delete_cookie(key="refresh_token", path='/')
         return response
