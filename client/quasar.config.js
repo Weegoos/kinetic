@@ -89,6 +89,9 @@ module.exports = configure(function (/* ctx */) {
           { server: false },
         ],
       ],
+      // extendViteConf(viteConf) {
+      //   viteConf.base = 'https://kinetic.kz/static/';
+      // },
     },
 
     // Full list of options: https://v2.quasar.dev/quasar-cli-vite/quasar-config-js#devServer
