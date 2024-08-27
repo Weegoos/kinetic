@@ -78,7 +78,7 @@
 
 <script setup>
 import { useQuasar } from "quasar";
-import { ref } from "vue";
+import { onMounted, ref } from "vue";
 import { useRouter } from "vue-router";
 import calendar from "../assets/drawer/calendar.png";
 const expanded = ref([]);
