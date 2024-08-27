@@ -18,7 +18,11 @@
 
         <q-tab-panels v-model="tab" animated>
           <q-tab-panel name="physicalTraining">
-            <!-- Здесь будет физическая подготовка каждого сотрудника -->
+            <section class="row q-gutter-md">
+              <div class="col">
+                <SpeedChart />
+              </div>
+            </section>
           </q-tab-panel>
 
           <q-tab-panel name="alarms">
@@ -39,7 +43,7 @@
 <script setup>
 import { useQuasar } from "quasar";
 import { ref, watch } from "vue";
-
+import SpeedChart from "./Charts/PieChartsPage.vue";
 const $q = useQuasar();
 const props = defineProps({
   openDetailedInformation: {
