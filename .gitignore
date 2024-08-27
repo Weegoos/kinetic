@@ -1,33 +1,21 @@
-.DS_Store
-.thumbs.db
+# Ignore compiled Python bytecode files
+*.pyc
+
+# Ignore Python cache directories
+__pycache__/
+
+# Ignore editor-specific files
+.vscode/
+.idea/
+*.sublime-*
+
+# Ignore File's Storage directory
+uploads/
+/db-data
+/kc_pg_data
+
+# Ignore node modules at client dir
 node_modules
 
-# Quasar core related directories
-.quasar
-/dist
-/quasar.config.*.temporary.compiled*
-
-# Cordova related directories and files
-/src-cordova/node_modules
-/src-cordova/platforms
-/src-cordova/plugins
-/src-cordova/www
-
-# Capacitor related directories and files
-/src-capacitor/www
-/src-capacitor/node_modules
-
-# Log files
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-
-# Editor directories and files
-.idea
-*.suo
-*.ntvs*
-*.njsproj
-*.sln
-
-# local .env files
-.env.local*
+# Ignore Python Virtual Environment (venv)
+.venv

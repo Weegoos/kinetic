@@ -1,0 +1,9 @@
+fastapi[standard]
+sqlalchemy
+psycopg2-binary
+pyjwt
+python-jose
+alembic
+uvicorn
+python-dotenv
+requests
