@@ -58,6 +58,14 @@
             <q-item-section>Мои результаты</q-item-section>
           </q-item>
         </q-list>
+        <q-list>
+          <q-item clickable v-ripple @click="pushToStaff">
+            <q-item-section avatar>
+              <q-icon name="code" />
+            </q-item-section>
+            <q-item-section>Сотрудники</q-item-section>
+          </q-item>
+        </q-list>
       </q-drawer>
       <q-page-container>
         <q-page>
@@ -109,6 +117,10 @@ const pustToResultPage = () => {
 
 const pushToAnalyticsPage = () => {
   router.push("/analytics");
+};
+
+const pushToStaff = () => {
+  router.push("/staff");
 };
 </script>
 
