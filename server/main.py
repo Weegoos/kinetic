@@ -49,6 +49,6 @@ async def redoc_html():
 
 @app.get('/')
 async def root():
-    return RedirectResponse(url=server_base_url)
+    return RedirectResponse(url=client_base_url)
 
 app.include_router(auth_router.auth_router, prefix="/auth", tags=["Authorization"])

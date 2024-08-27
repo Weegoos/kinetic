@@ -50,7 +50,7 @@ def decode_token(token: str):
 
 @auth_router.get("/login")
 async def login():
-    redirect_uri = f"{server_base_url}auth/callback"
+    redirect_uri = f"{server_base_url}/auth/callback"
     params = {
         "client_id": client_id,
         "response_type": "code",
@@ -64,7 +64,7 @@ async def login():
         else:
             raise HTTPException(status_code=500, detail="Failed to generate authentication URL")
     except Exception as e:
-        raise HTTPException(status_code=500, detail="Error getting authentication URL")
+        raise HTTPException(status_code=500, detail=f"Error getting authentication URL: {str(e)}")
 
 @auth_router.get("/logout")
 async def logout(request: Request):
@@ -106,14 +106,12 @@ async def callback(request: Request):
     token_data = {
         'grant_type': 'authorization_code',
         'code': code,
-        'redirect_uri': f"{server_base_url}auth/callback",
+        'redirect_uri': f"{server_base_url}/auth/callback",
         'client_id': client_id,
         'client_secret': client_secret,
     }
     try:
         response = requests.post(keycloak_token_url, data=token_data)
-        if response.status_code != 200:
-            raise HTTPException(status_code=response.status_code, detail="Failed to get access token")
 
         token = response.json()
         access_token = token.get('access_token')
@@ -122,13 +120,14 @@ async def callback(request: Request):
         if not access_token or not refresh_token:
             raise HTTPException(status_code=400, detail="Access token or refresh token not found in response")
 
-        response = RedirectResponse(url="/")
+        response = RedirectResponse(url=front_base_url)
         response.set_cookie(key="access_token", value=access_token, path='/')
         response.set_cookie(key="refresh_token", value=refresh_token, path='/')
         return response
-    except Exception as e:
+    except requests.RequestException as e:
         print(f"Error exchanging code for token: {e}")
         raise HTTPException(status_code=500, detail="Error exchanging code for token")
+
 
 @auth_router.get("/user")
 async def get_user_info(request: Request):
