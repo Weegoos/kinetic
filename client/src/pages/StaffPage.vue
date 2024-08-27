@@ -101,7 +101,7 @@ function editRow(row) {
   console.log("Editing row:", row);
 }
 
-const openDetailedInformation = ref(true);
+const openDetailedInformation = ref(false);
 
 function openDetialedWindow(row) {
   openDetailedInformation.value = true;

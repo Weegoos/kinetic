@@ -66,6 +66,14 @@
             <q-item-section>Сотрудники</q-item-section>
           </q-item>
         </q-list>
+        <q-list bordered>
+          <q-item clickable v-ripple @click="logout">
+            <q-item-section avatar>
+              <q-icon  name="logout" />
+            </q-item-section>
+            <q-item-section>Выйти</q-item-section>
+          </q-item>
+        </q-list>
       </q-drawer>
       <q-page-container>
         <q-page>
@@ -122,6 +130,10 @@ const pushToAnalyticsPage = () => {
 const pushToStaff = () => {
   router.push("/staff");
 };
+
+const logout = () => {
+  window.location.href = '/'
+}
 </script>
 
 <style scoped>
