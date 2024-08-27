@@ -1,6 +1,7 @@
-from fastapi import APIRouter, HTTPException, Request, Response, Depends
+from fastapi import APIRouter, HTTPException, Request, Depends
 from fastapi.responses import RedirectResponse
 from fastapi.security import OAuth2PasswordBearer
+from dependencies import get_admin_access_token
 import requests
 import jwt
 import os
@@ -15,31 +16,12 @@ realm_name = os.getenv("REALM_NAME")
 client_id = os.getenv("CLIENT_ID")
 client_secret = os.getenv("CLIENT_SECRET_KEY")
 
-admin_client_id = os.getenv("ADMIN_CLIENT_ID")
-admin_username = os.getenv("ADMIN_USERNAME")
-admin_password = os.getenv("ADMIN_PASSWORD")
-
 keycloak_auth_url = f"{keycloak_server_url}realms/{realm_name}/protocol/openid-connect/auth"
 keycloak_token_url = f"{keycloak_server_url}realms/{realm_name}/protocol/openid-connect/token"
 keycloak_logout_url = f"{keycloak_server_url}realms/{realm_name}/protocol/openid-connect/logout"
 keycloak_users_url = f"{keycloak_server_url}admin/realms/{realm_name}/users"
 
 oauth2_scheme = OAuth2PasswordBearer(tokenUrl=keycloak_token_url)
-
-def get_admin_access_token():
-    token_url = f"{keycloak_server_url}realms/master/protocol/openid-connect/token"
-    data = {
-        "client_id": admin_client_id,
-        "username": admin_username,
-        "password": admin_password,
-        "grant_type": "password",
-    }
-    try:
-        response = requests.post(token_url, data=data)
-        response.raise_for_status()
-        return response.json()["access_token"]
-    except requests.RequestException as e:
-        raise HTTPException(status_code=500, detail=f"Error obtaining admin access token: {e}")
 
 def decode_token(token: str):
     try:
