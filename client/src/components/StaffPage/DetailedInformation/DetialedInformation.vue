@@ -18,7 +18,7 @@
 
         <q-tab-panels v-model="tab" animated>
           <q-tab-panel name="physicalTraining">
-            Здесь будет физическая подготовка каждого сотрудника
+            <!-- Здесь будет физическая подготовка каждого сотрудника -->
           </q-tab-panel>
 
           <q-tab-panel name="alarms">
