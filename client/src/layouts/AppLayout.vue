@@ -69,11 +69,7 @@
         <q-list bordered>
           <q-item clickable v-ripple @click="logoutBtn">
             <q-item-section avatar>
-<<<<<<< HEAD
-              <q-icon  name="logout" />
-=======
               <q-icon name="logout" />
->>>>>>> main
             </q-item-section>
             <q-item-section>Выйти</q-item-section>
           </q-item>
@@ -137,19 +133,13 @@ const pushToStaff = () => {
 };
 
 const logout = () => {
-<<<<<<< HEAD
-  window.location.href = '/'
-}
-=======
   window.location.href = "/";
 };
->>>>>>> main
 
 const redirectToKeycloakLogin = () => {
   window.location.href = `http://localhost:8000/auth/login`;
 };
 
-<<<<<<< HEAD
 onBeforeMount(() => {
   (async () => {
     try {
@@ -158,8 +148,6 @@ onBeforeMount(() => {
       });
       const userInfo = response.data;
       console.log(userInfo);
-
-
     } catch (error) {
       console.error("Ошибка при получении Access Token:", error);
       redirectToKeycloakLogin();
@@ -168,39 +156,13 @@ onBeforeMount(() => {
 });
 
 const logoutFromBackend = async () => {
-  window.location.href = `http://localhost:8000/auth/logout`
-  sessionStorage.clear()
+  window.location.href = `http://localhost:8000/auth/logout`;
+  sessionStorage.clear();
 };
 
 const logoutBtn = () => {
   logoutFromBackend();
 };
-=======
-// onBeforeMount(() => {
-//   (async () => {
-//     try {
-//       const response = await axios.get(`http://localhost:8000/auth/user`, {
-//         withCredentials: true,
-//       });
-//       const userInfo = response.data;
-//       console.log(userInfo);
-
-//     } catch (error) {
-//       console.error("Ошибка при получении Access Token:", error);
-//       redirectToKeycloakLogin();
-//     }
-//   })();
-// });
-
-// const logoutFromBackend = async () => {
-//   window.location.href = `http://localhost:8000/auth/logout`
-//   sessionStorage.clear()
-// };
-
-// const logoutBtn = () => {
-//   logoutFromBackend();
-// };
->>>>>>> main
 </script>
 
 <style scoped>
