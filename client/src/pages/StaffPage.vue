@@ -31,6 +31,10 @@
         :openDetailedInformation="openDetailedInformation"
         @close="closeDetialedWindow"
       />
+      <EditDialog
+        :openEditDialogInformation="openEditDialogInformation"
+        @close="closeEditPage"
+      />
     </section>
   </div>
 </template>
@@ -38,6 +42,7 @@
 <script setup>
 import { useQuasar } from "quasar";
 import DetialedInformation from "../components/StaffPage/DetailedInformation/DetialedInformation.vue";
+import EditDialog from "../components/StaffPage/EditInformation/EditDialog.vue";
 import axios from "axios";
 import { onMounted, ref } from "vue";
 import { getCurrentInstance } from "vue";
@@ -74,7 +79,7 @@ const fetchAllUsers = async () => {
         Authorization: `Bearer ${token}`,
       },
     });
-    props.getCorrectMessage("Данные успешно получены");
+    // props.getCorrectMessage("Данные успешно получены");
 
     const users = response.data;
 
@@ -140,10 +145,15 @@ const columns = [
   },
 ];
 
+const openEditDialogInformation = ref(false);
 function editRow(row) {
-  console.log("Editing row:", row);
+  // console.log("Editing row:", row);
+  openEditDialogInformation.value = true;
 }
 
+const closeEditPage = () => {
+  openEditDialogInformation.value = false;
+};
 const openDetailedInformation = ref(false);
 
 function openDetialedWindow(row) {

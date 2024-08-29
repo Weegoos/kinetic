@@ -89,22 +89,22 @@ module.exports = configure(function (/* ctx */) {
           { server: false },
         ],
       ],
-      // extendViteConf(viteConf) {
-      //   viteConf.base = 'https://kinetic.kz/static/';
-      // },
+      extendViteConf(viteConf) {
+        viteConf.base = "https://candidate.kz/static/";
+      },
     },
 
     // Full list of options: https://v2.quasar.dev/quasar-cli-vite/quasar-config-js#devServer
     devServer: {
       // https: true
-      open: true, // opens browser window automatically
+      open: true,
     },
 
     // https://v2.quasar.dev/quasar-cli-vite/quasar-config-js#framework
     framework: {
       config: {},
 
-      iconSet: "fontawesome-v5",
+      // iconSet: 'material-icons', // Quasar icon set
       // lang: 'en-US', // Quasar language pack
 
       // For special cases outside of where the auto-import strategy can have an impact
@@ -115,7 +115,7 @@ module.exports = configure(function (/* ctx */) {
       // directives: [],
 
       // Quasar plugins
-      plugins: ["Notify"],
+      plugins: ["Notify", "Loading"],
     },
 
     // animations: 'all', // --- includes all animations
@@ -203,7 +203,7 @@ module.exports = configure(function (/* ctx */) {
       builder: {
         // https://www.electron.build/configuration/configuration
 
-        appId: "sport",
+        appId: "webapp",
       },
     },
 

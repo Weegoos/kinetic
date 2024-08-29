@@ -31,7 +31,7 @@
           </q-list>
         </div>
         <div>
-          <q-tree
+          <!-- <q-tree
             :nodes="simple"
             dense
             dark
@@ -40,7 +40,17 @@
             class="tree text-white q-ml-md"
             default-expand-all
           >
-          </q-tree>
+          </q-tree> -->
+          <q-expansion-item
+            expand-separator
+            icon="perm_identity"
+            label="Account settings"
+            default-opened
+          >
+            <div>
+              <q-btn color="primary" icon="check" label="OK" @click="onClick" />
+            </div>
+          </q-expansion-item>
         </div>
         <div>
           <q-list>
@@ -79,6 +89,7 @@
       </q-drawer>
       <q-page-container>
         <q-page>
+          Текущая стр: {{ currentPath }}
           <router-view
             :getCorrectMessage="getCorrectMessage"
             :getIncorrectMessage="getIncorrectMessage"
@@ -91,8 +102,8 @@
 
 <script setup>
 import { useQuasar } from "quasar";
-import { onBeforeMount, onMounted, ref } from "vue";
-import { useRouter } from "vue-router";
+import { computed, onBeforeMount, onMounted, ref } from "vue";
+import { useRoute, useRouter } from "vue-router";
 import calendar from "../assets/drawer/calendar.png";
 import axios from "axios";
 const expanded = ref([]);
@@ -137,6 +148,12 @@ const simple = [
   },
 ];
 
+const route = useRoute();
+const currentFullPath = computed(() => route.fullPath);
+
+console.log("Current full path:", route.fullPath);
+
+const expansionItem = () => {};
 const drawer = ref(true);
 
 const pushToMainPage = () => {
