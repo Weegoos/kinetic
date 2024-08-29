@@ -31,8 +31,49 @@
 <script setup>
 import { useQuasar } from "quasar";
 import DetialedInformation from "../components/StaffPage/DetailedInformation/DetialedInformation.vue";
-import { ref } from "vue";
+import axios from "axios";
+import { onMounted, ref } from "vue";
+import { getCurrentInstance } from "vue";
+const { proxy } = getCurrentInstance();
+const apiBaseUrl = proxy.$apiBaseUrl;
+const getCookie = proxy.$getCookie;
+
+const props = defineProps({
+  getCorrectMessage: Function,
+  // getIncorrectMessage: Function,
+});
 const $q = useQuasar();
+
+onMounted(() => {
+  console.log(apiBaseUrl);
+  fetchAllUsers();
+});
+
+const fetchAllUsers = async () => {
+  const token = getCookie("access_token");
+  if (!token) {
+    console.error("No access token found");
+    $q.notify({
+      message: "No access token found",
+      color: "negative",
+      position: "top",
+    });
+    return;
+  }
+  try {
+    const response = await axios.get("https://kinetic.kz/api/users", {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    props.getCorrectMessage("Данные успешно получены");
+
+    console.log(response.data);
+  } catch (error) {
+    console.error(error);
+  }
+};
+
 const columns = [
   {
     name: "id",

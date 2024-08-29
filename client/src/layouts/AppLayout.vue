@@ -79,7 +79,10 @@
       </q-drawer>
       <q-page-container>
         <q-page>
-          <router-view />
+          <router-view
+            :getCorrectMessage="getCorrectMessage"
+            :getIncorrectMessage="getIncorrectMessage"
+          />
         </q-page>
       </q-page-container>
     </q-layout>
@@ -95,6 +98,24 @@ import axios from "axios";
 const expanded = ref([]);
 const router = useRouter();
 const $q = useQuasar();
+
+const getCorrectMessage = (message) => {
+  $q.notify({
+    message: message,
+    icon: "check",
+    color: "positive",
+    position: "top",
+  });
+};
+
+const getIncorrectMessage = (message) => {
+  $q.notify({
+    message: message,
+    icon: "error",
+    color: "negative",
+    position: "top",
+  });
+};
 const simple = [
   {
     label: "Календарь",
