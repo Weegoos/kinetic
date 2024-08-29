@@ -40,7 +40,7 @@ const getCookie = proxy.$getCookie;
 
 const props = defineProps({
   getCorrectMessage: Function,
-  // getIncorrectMessage: Function,
+  getIncorrectMessage: Function,
 });
 const $q = useQuasar();
 
@@ -70,7 +70,7 @@ const fetchAllUsers = async () => {
 
     console.log(response.data);
   } catch (error) {
-    console.error(error);
+    props.getIncorrectMessage(error);
   }
 };
 
