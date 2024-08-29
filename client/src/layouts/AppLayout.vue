@@ -44,11 +44,17 @@
           <q-expansion-item
             expand-separator
             icon="perm_identity"
-            label="Account settings"
+            label="Календарь"
             default-opened
           >
-            <div>
-              <q-btn color="primary" icon="check" label="OK" @click="onClick" />
+            <div v-for="(item, id) in button" :key="id">
+              <q-btn
+                class="button"
+                flat
+                no-caps
+                :label="item.name"
+                @click="navigation(item.link)"
+              />
             </div>
           </q-expansion-item>
         </div>
@@ -89,7 +95,6 @@
       </q-drawer>
       <q-page-container>
         <q-page>
-          Текущая стр: {{ currentPath }}
           <router-view
             :getCorrectMessage="getCorrectMessage"
             :getIncorrectMessage="getIncorrectMessage"
@@ -148,12 +153,25 @@ const simple = [
   },
 ];
 
+const button = ref([
+  {
+    name: "Зачеты",
+    link: "/class_calendar",
+  },
+  {
+    name: "Мероприятия",
+    link: "/event_calendar",
+  },
+]);
+
 const route = useRoute();
 const currentFullPath = computed(() => route.fullPath);
 
 console.log("Current full path:", route.fullPath);
 
-const expansionItem = () => {};
+const navigation = (route) => {
+  router.push(route);
+};
 const drawer = ref(true);
 
 const pushToMainPage = () => {
@@ -218,5 +236,9 @@ const logoutBtn = () => {
 <style scoped>
 .tree {
   color: white;
+}
+
+.button {
+  width: 100%;
 }
 </style>
