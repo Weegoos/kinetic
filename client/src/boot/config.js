@@ -10,7 +10,7 @@ export default ({ app, $q }) => {
     const parts = value.split(`; ${name}=`);
     if (parts.length === 2) {
       const cookieValue = parts.pop().split(";").shift();
-      console.log(`Cookie found: ${name}=${cookieValue}`);
+      console.log(`Cookies have been successfully found`);
       return cookieValue;
     }
     console.log(`Cookie not found: ${name}`);

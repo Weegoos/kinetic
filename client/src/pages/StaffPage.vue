@@ -2,7 +2,14 @@
   <div class="q-pa-md">
     <p class="text-bold text-h6">Поиск сотрудников</p>
     <section>
-      <q-table flat bordered dense :rows="rows" :columns="columns" row-key="id">
+      <q-table
+        flat
+        bordered
+        dense
+        :rows="candidates"
+        :columns="columns"
+        row-key="id"
+      >
         <template v-slot:body-cell-actions="props">
           <q-td :props="props">
             <q-btn flat size="sm" icon="edit" @click="editRow(props.row)">
@@ -49,6 +56,7 @@ onMounted(() => {
   fetchAllUsers();
 });
 
+const candidates = ref([]);
 const fetchAllUsers = async () => {
   const token = getCookie("access_token");
   if (!token) {
@@ -68,7 +76,13 @@ const fetchAllUsers = async () => {
     });
     props.getCorrectMessage("Данные успешно получены");
 
-    console.log(response.data);
+    const users = response.data;
+
+    candidates.value = users.map((worker) => ({
+      fullname: `${worker.firstName} ${worker.lastName}`,
+      specialty: worker.attributes.department,
+      iin: worker.attributes.iin,
+    }));
   } catch (error) {
     props.getIncorrectMessage(error);
   }
@@ -119,22 +133,10 @@ const columns = [
     field: "specialty",
     sortable: true,
   },
-  // Add a column for actions
   {
     name: "actions",
     label: "Действия",
     align: "center",
-  },
-];
-
-const rows = [
-  {
-    id: 1,
-    fullname: "Иванов Иван Иванович",
-    iin: "123456789012",
-    department: "Управление 1",
-    specialty: "Специалист",
-    physicalTraining: "Хорошая",
   },
 ];
 
