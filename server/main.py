@@ -3,8 +3,13 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.staticfiles import StaticFiles
 from fastapi.responses import RedirectResponse
 from fastapi.openapi.docs import  get_redoc_html, get_swagger_ui_html
-from routers import auth_router, user_router
+from routers import (auth_router, user_router, event_router)
 import os
+from models import models
+from utils.database import engine
+
+# Create the database tables
+models.Base.metadata.create_all(bind=engine)
 
 app = FastAPI(docs_url=None, redoc_url=None, title="Kinetic", root_path='/api')
 
@@ -51,5 +56,6 @@ async def redoc_html():
 async def root():
     return RedirectResponse(url=client_base_url)
 
+app.include_router(event_router.event_router, tags=["Event"])
 app.include_router(user_router.user_router, tags=["Users"])
 app.include_router(auth_router.auth_router, prefix="/auth", tags=["Keycloak"])

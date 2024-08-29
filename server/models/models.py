@@ -9,11 +9,12 @@ class Event(Base):
     
     id = Column(Integer, primary_key=True, index=True)
     name = Column(String, index=True)
-    event_type = Column(Integer, nullable=False)  # 1 - physical test, 2 - shooting test, 3... - other test
+    event_type = Column(Integer, nullable=False, default=1)  # 1 - physical test, 2 - shooting test, 3... - other test
     start_date = Column(Date, nullable=False)
     end_date = Column(Date, nullable=False)
     location = Column(String, nullable=False)
-    manager_id = Column(String, nullable=False)  # ID менеджера из Keycloak
+    manager_login = Column(String, nullable=False)
+    manager_fullname = Column(String, nullable=False)
     
     created_at = Column(DateTime(timezone=True), server_default=func.now())
     updated_at = Column(DateTime(timezone=True), onupdate=func.now())
@@ -24,7 +25,8 @@ class TestResult(Base):
     __tablename__ = 'test_results'
     
     id = Column(Integer, primary_key=True, index=True)
-    user_id = Column(String, nullable=False)  # ID пользователя из Keycloak
+    user_login = Column(String, nullable=False)
+    user_fullname = Column(String, nullable=False)
     event_id = Column(Integer, ForeignKey('events.id'))
     score = Column(Integer, nullable=False)
     

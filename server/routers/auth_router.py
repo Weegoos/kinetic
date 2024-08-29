@@ -1,7 +1,8 @@
 from fastapi import APIRouter, HTTPException, Request, Depends
 from fastapi.responses import RedirectResponse
-from fastapi.security import OAuth2PasswordBearer
+from fastapi.security import OAuth2AuthorizationCodeBearer
 from dependencies import get_admin_access_token
+from typing import Dict, Any
 import requests
 import jwt
 import os
@@ -21,14 +22,13 @@ keycloak_token_url = f"{keycloak_server_url}realms/{realm_name}/protocol/openid-
 keycloak_logout_url = f"{keycloak_server_url}realms/{realm_name}/protocol/openid-connect/logout"
 keycloak_users_url = f"{keycloak_server_url}admin/realms/{realm_name}/users"
 
-oauth2_scheme = OAuth2PasswordBearer(tokenUrl=keycloak_token_url)
-
 def decode_token(token: str):
     try:
         decoded_token = jwt.decode(token, options={"verify_signature": False})
         return decoded_token
     except jwt.PyJWTError as e:
         raise HTTPException(status_code=400, detail=f"Error decoding token: {str(e)}")
+
 
 @auth_router.get("/login")
 async def login():
