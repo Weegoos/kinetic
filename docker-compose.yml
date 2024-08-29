@@ -1,0 +1,114 @@
+services:
+  server:
+    container_name: server-1
+    build:
+      context: ./server
+    volumes:
+      - ./server:/server
+      - ./server/static:/static
+    ports:
+      - "8000:8000"
+    env_file: 
+      - .env
+    depends_on:
+      - db
+    networks:
+      - kinetic-network
+    command: bash -c "uvicorn main:app --reload --host 0.0.0.0 --port 8000"
+
+  client:
+    build:
+      context: ./client
+    volumes:
+      - ./client:/client
+    ports:
+      # - "80:9000"
+      - "9000:9000"
+    env_file:
+      - .env
+    networks:
+      - kinetic-network
+    command: bash -c "npm config set strict-ssl false && npm cache clean --force && npm install && npm run dev"
+
+  db:
+    image: postgres
+    restart: always
+    volumes:
+      - ./db-data:/var/lib/postgresql/data
+      - ./dumps/db:/dumps
+      - ./scripts:/scripts
+    environment:
+      POSTGRES_DB: sts
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: dark
+    expose:
+      - "5432"
+    ports:
+      - "5432:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - kinetic-network
+
+  keycloak_db:
+    image: postgres:16
+    volumes:
+      - ./kc_pg_data:/var/lib/postgresql/data
+      - ./dumps/keycloak:/dumps
+      - ./scripts:/scripts
+    environment:
+      POSTGRES_DB: keycloak
+      POSTGRES_USER: keycloak
+      POSTGRES_PASSWORD: keycloak
+    ports:
+      - "6543:5432"
+    networks:
+      - kinetic-network
+    stop_grace_period: 30s
+
+  keycloak:
+    image: keycloak/keycloak
+    command: start-dev --import-realm
+    hostname: keycloak
+    volumes:
+      - ./dumps/keycloak:/opt/keycloak/data/import
+    ports:
+      - "8080:8080"
+    env_file:
+      - .env
+    restart: always
+    depends_on:
+      - db
+      - keycloak_db
+    networks:
+      - kinetic-network
+
+  nginx:
+    image: nginx:1.26.1
+    container_name: nginx-1
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./nginx/nginx.conf:/etc/nginx/nginx.conf
+      - ./nginx/ssl:/etc/nginx/ssl
+      - ./client/dist/spa:/static
+      - ./client/dist/spa/index.html:/etc/nginx/html/index.html
+    depends_on:
+      - server
+    networks:
+      - kinetic-network
+    
+# volumes:
+#   db-data:
+#     driver: local
+#   kc_pg_data:
+#     driver: local
+
+networks:
+  kinetic-network:
+    driver: bridge
+    external: true
